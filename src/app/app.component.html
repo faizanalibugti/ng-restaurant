@@ -1,0 +1,116 @@
+<nav class="navbar is-fixed top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#">
+      <img
+        src="./assets/restaurant-dive-logo-vector.jpg"
+        class="brand-logo"
+        alt=""
+      />
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item">
+        <div class="search">
+          <input
+            type="text"
+            class="search-box"
+            placeholder="search brand, product"
+          />
+          <button class="search-btn">search</button>
+        </div>
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-light">
+            <a href="#"><i class="fas fa-user"></i></a>
+          </a>
+          <a class="button is-light" (click)="showModal = true">
+            <a class="cart" href="#"><i class="fas fa-shopping-cart"></i></a>
+            <h3 class="qty">{{ totalQuantity }}</h3>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="items">
+  <div class="card" *ngFor="let item of items">
+    <div class="card-image">
+      <figure class="image is-48by48">
+        <img src="{{ item.image }}" alt="{{ item.image }}" />
+      </figure>
+    </div>
+
+    <div class="card-content">
+      <h4>{{ item.food }}</h4>
+      <br />
+      <p>${{ item.cost }}</p>
+    </div>
+
+    <footer class="card-footer">
+      <a
+        href="#"
+        #additem
+        (click)="addToCart(additem)"
+        [attr.data-cost]="item.cost"
+        [attr.data-item]="item.food"
+        class="add card-footer-item"
+        >Add to Cart</a
+      >
+    </footer>
+  </div>
+</div>
+
+<div class="modal" [ngClass]="showModal ? 'is-active' : ''">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Your Cart</p>
+      <!-- <button class="delete" aria-label="close"></button> -->
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+      <div class="item">
+        <div class="modal-list">
+          <p class="cart-qty">
+            {{ shoppingCart.a.quantity == 0 ? "" : shoppingCart.a.quantity }}
+          </p>
+          <p>{{ shoppingCart.a.quantity == 0 ? "" : shoppingCart.a.title }}</p>
+        </div>
+        <div class="modal-list">
+          <p class="cart-qty">
+            {{ shoppingCart.b.quantity == 0 ? "" : shoppingCart.b.quantity }}
+          </p>
+          <p>{{ shoppingCart.b.quantity == 0 ? "" : shoppingCart.b.title }}</p>
+        </div>
+        <div class="modal-list">
+          <p class="cart-qty">
+            {{ shoppingCart.c.quantity == 0 ? "" : shoppingCart.c.quantity }}
+          </p>
+          <p>{{ shoppingCart.c.quantity == 0 ? "" : shoppingCart.c.title }}</p>
+        </div>
+      </div>
+
+      <div class="bill">
+        <p>Subtotal = ${{ subTotal.toFixed(2) }}</p>
+        <p>Tax (10%) = ${{ (0.1 * subTotal).toFixed(2) }}</p>
+        <p>Delivery = $5.00</p>
+        <P>Total = ${{ grandTotal.toFixed(2) }}</P>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="back button is-success" (click)="showModal = false">
+        Proceed to Checkout
+      </button>
+      <button class="back button" (click)="showModal = false">
+        Back to Menu
+      </button>
+    </footer>
+  </div>
+</div>
