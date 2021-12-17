@@ -31,7 +31,7 @@
           </a>
           <a class="button is-light" (click)="showModal = true">
             <a class="cart" href="#"><i class="fas fa-shopping-cart"></i></a>
-            <h3 class="qty">{{ totalQuantity }}</h3>
+            <h3 *ngIf="totalQuantity != 0" class="qty">{{ totalQuantity }}</h3>
           </a>
         </div>
       </div>
@@ -77,23 +77,26 @@
     <section class="modal-card-body">
       <!-- Content ... -->
       <div class="item">
-        <div class="modal-list">
+        <div class="modal-list" *ngIf="shoppingCart.a.quantity != 0">
           <p class="cart-qty">
-            {{ shoppingCart.a.quantity == 0 ? "" : shoppingCart.a.quantity }}
+            {{ shoppingCart.a.quantity }}
           </p>
-          <p>{{ shoppingCart.a.quantity == 0 ? "" : shoppingCart.a.title }}</p>
+          <p>{{ shoppingCart.a.title }}</p>
+          <p><a (click)="removeFromCart(shoppingCart.a.title)" href="#"><i style="color: red;" class="fas fa-trash"></i></a></p>
         </div>
-        <div class="modal-list">
+        <div class="modal-list" *ngIf="shoppingCart.b.quantity != 0">
           <p class="cart-qty">
-            {{ shoppingCart.b.quantity == 0 ? "" : shoppingCart.b.quantity }}
+            {{ shoppingCart.b.quantity }}
           </p>
-          <p>{{ shoppingCart.b.quantity == 0 ? "" : shoppingCart.b.title }}</p>
+          <p>{{ shoppingCart.b.title }}</p>
+          <p><a (click)="removeFromCart(shoppingCart.b.title)" href="#"><i style="color: red;" class="fas fa-trash"></i></a></p>
         </div>
-        <div class="modal-list">
+        <div class="modal-list" *ngIf="shoppingCart.c.quantity != 0">
           <p class="cart-qty">
-            {{ shoppingCart.c.quantity == 0 ? "" : shoppingCart.c.quantity }}
+            {{ shoppingCart.c.quantity }}
           </p>
-          <p>{{ shoppingCart.c.quantity == 0 ? "" : shoppingCart.c.title }}</p>
+          <p>{{ shoppingCart.c.title }}</p>
+          <p><a (click)="removeFromCart(shoppingCart.c.title)" href="#"><i style="color: red;" class="fas fa-trash"></i></a></p>
         </div>
       </div>
 
